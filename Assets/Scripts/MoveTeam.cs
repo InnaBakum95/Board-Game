@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public partial class MoveTeam : MonoBehaviour {
-    
+
+
+    public static MoveTeam Instance;
     public List<GameObject> Teams = new List<GameObject>();
     public List<Flag> FlagsList = new List<Flag>();
+
 
     public Color Red;
     public Color Yellow;
@@ -35,6 +38,10 @@ public partial class MoveTeam : MonoBehaviour {
 
     // Use this for initialization
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void OnDrawGizmos()
     {
         iTween.DrawLineGizmos(pathTeamOne);
