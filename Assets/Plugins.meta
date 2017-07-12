@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 5b6850c9c67e3f040a18f9ec5506ce85
 folderAsset: yes
 timeCreated: 1499798160
+=======
+guid: 23fe8792f546e9041a18838193c40b6e
+folderAsset: yes
+timeCreated: 1499878462
+>>>>>>> Dmitry
 licenseType: Pro
 DefaultImporter:
   userData: 
