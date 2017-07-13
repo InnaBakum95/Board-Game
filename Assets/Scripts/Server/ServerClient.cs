@@ -1,6 +1,7 @@
 ﻿using System;
 using BestHTTP.SocketIO;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Server
 {
@@ -10,10 +11,19 @@ namespace Assets.Scripts.Server
 
         private SocketManager _manager;
 
+        public Text texxxt;
 
         private void Start()
         {
-            _manager = new SocketManager(new Uri("http://localhost:3000//socket.io/"));
+            Debug.Log("Trying to connect");
+
+
+            _manager = new SocketManager(new Uri("http://localhost:3000/socket.io/"));
+
+            Debug.Log("Port: " + _manager.Uri);
+            GameObject.Find("Text Port").GetComponent<Text>().text = "Port: " + _manager.Uri;
+
+
             _manager.Socket.On("send data", OnSendData);
         }
     
