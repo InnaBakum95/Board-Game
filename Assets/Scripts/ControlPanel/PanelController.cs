@@ -10,7 +10,7 @@ namespace Assets.Scripts.ControlPanel
         public Transform RowsPanel;
         public GameObject RowPrefab;
 
-        public GameObject NewGamePanel;
+        public NewGamePanel NewGamePanel;
 
         private ServerClient _serverClient;
         private ChallengeCoins _challengeCoins;
@@ -52,7 +52,7 @@ namespace Assets.Scripts.ControlPanel
             }
         }
         
-        public void NewGame(string gameName, byte startCoins, List<string> teams)
+        public void NewGame(string gameName, List<string> teams)
         {
             _serverClient.SendData(new Data()
             {
@@ -85,7 +85,7 @@ namespace Assets.Scripts.ControlPanel
             }
 
             _challengeCoins.SetChallengeCoins(0);
-            NewGamePanel.SetActive(false);
+            NewGamePanel.HideCustom();
         }
 
         public void Move(byte team, byte steps, bool isForward)
