@@ -8,12 +8,12 @@ namespace Assets.Scripts.Server
     public class Data
     {
         [SerializeField] public byte Code;
-        [SerializeField] public byte TeamsCount;
         [SerializeField] public byte CurrentTeam;
         [SerializeField] public byte Steps;
         [SerializeField] public bool MoveForward;
+        [SerializeField] public bool AnswerIsCorrect;
+        [SerializeField] public int ChallengeCoins;
         [SerializeField] public NewGameInfo NewGameInfo;
-
     }
 
     [Serializable]
@@ -21,13 +21,6 @@ namespace Assets.Scripts.Server
     {
         [SerializeField] public string GameName;
         [SerializeField] public List<string> TeamNames;
-        [SerializeField] public int CoinsAmount;
     }
-
     
-    //public class Team
-    //{
-    //    [SerializeField] public string Name;
-    //    [SerializeField] public Color Color;
-    //}
 }
