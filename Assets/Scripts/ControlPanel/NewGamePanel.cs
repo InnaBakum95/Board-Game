@@ -14,11 +14,15 @@ namespace Assets.Scripts.ControlPanel
 
         private int _teamsCount;
         private PanelController _panelController;
+        private List<InputField> _teamNameInputFields;
 
         private void Start()
         {
             _teamsCount = 2;
             _panelController = FindObjectOfType<PanelController>();
+            _teamNameInputFields = new List<InputField>();
+            Teams.ForEach(x => _teamNameInputFields.Add(x.transform.GetChild(0).GetComponent<InputField>()));
+            gameObject.SetActive(false);
         }
 
         public void AddTeam()
@@ -46,7 +50,7 @@ namespace Assets.Scripts.ControlPanel
             var teamNames = new List<string>();
             for (int i = 0; i < _teamsCount; i++)
             {
-                string teamName = Teams[i].transform.GetChild(0).GetComponent<InputField>().text;
+                string teamName = _teamNameInputFields[i].text;
                 if (string.IsNullOrEmpty(teamName))
                 {
                     teamName = "Team " + (i+1).ToString();
@@ -56,6 +60,18 @@ namespace Assets.Scripts.ControlPanel
             string startCoinsText = StartCoinsInputField.text;
             byte startCoins = string.IsNullOrEmpty(startCoinsText) ? (byte) 0 : Convert.ToByte(startCoinsText);
             _panelController.NewGame("Test", startCoins, teamNames);
+        }
+
+        public void ShowPanelCustom()
+        {
+            _teamNameInputFields.ForEach(x => x.text = "");
+            StartCoinsInputField.text = 15.ToString();
+            for (int i = 2; i < 5; i++)
+            {
+                Teams[i].SetActive(false);
+            }
+            _teamsCount = 2;
+            gameObject.SetActive(true);
         }
     }
 }
