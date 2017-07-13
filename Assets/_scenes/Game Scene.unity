@@ -4732,6 +4732,7 @@ MonoBehaviour:
   Blue: {r: 0, g: 0, b: 1, a: 1}
   Purple: {r: 1, g: 0, b: 1, a: 1}
   inputField: {fileID: 995820030}
+  percent: 0.05
 --- !u!4 &1344057083
 Transform:
   m_ObjectHideFlags: 0
@@ -4759,13 +4760,16 @@ MonoBehaviour:
   TeamsName: []
   InfoAboutTeams: {fileID: 1905263648713402, guid: 491255a66bdaaeb44a1d25118ede2e9b,
     type: 2}
+  Title: {fileID: 15199738}
   ImageBackground: {fileID: 1456032074}
+  CountCoins: {fileID: 1721100811}
   TeamsPieck:
   - {fileID: 1202460855653324, guid: 10814e0c37aab8349899b24b063d0dc3, type: 2}
   - {fileID: 1380080302293990, guid: fbd3011dace3f804e81f3485de56351d, type: 2}
   - {fileID: 1922948574510014, guid: 4532344970d84124a9ce8d39943de285, type: 2}
   - {fileID: 1471895706741276, guid: 51f1e7b91ef96944c85f0f6e75ae2356, type: 2}
   - {fileID: 1777773877459242, guid: 14b66c9451c61a8428a625f52229aeac, type: 2}
+  _infoAboutTeams: []
 --- !u!114 &1344057085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6410,7 +6414,7 @@ GameObject:
   - component: {fileID: 1800797921}
   - component: {fileID: 1800797920}
   m_Layer: 0
-  m_Name: Render Camera
+  m_Name: RenderCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
