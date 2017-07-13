@@ -10,7 +10,9 @@ namespace Assets.Scripts.ControlPanel
     public class NewGamePanel : MonoBehaviour
     {
         public List<GameObject> Teams;
-        public InputField StartCoinsInputField;
+        public InputField GameNameInputField;
+        public GameObject BlockPanel;
+        public GameObject CloseButton;
 
         private int _teamsCount;
         private PanelController _panelController;
@@ -22,7 +24,6 @@ namespace Assets.Scripts.ControlPanel
             _panelController = FindObjectOfType<PanelController>();
             _teamNameInputFields = new List<InputField>();
             Teams.ForEach(x => _teamNameInputFields.Add(x.transform.GetChild(0).GetComponent<InputField>()));
-            gameObject.SetActive(false);
         }
 
         public void AddTeam()
@@ -57,21 +58,34 @@ namespace Assets.Scripts.ControlPanel
                 }
                 teamNames.Add(teamName);
             }
-            string startCoinsText = StartCoinsInputField.text;
-            byte startCoins = string.IsNullOrEmpty(startCoinsText) ? (byte) 0 : Convert.ToByte(startCoinsText);
-            _panelController.NewGame("Test", startCoins, teamNames);
+
+            string gameName = GameNameInputField.text;
+            if (string.IsNullOrEmpty(gameName))
+            {
+                gameName = GameNameInputField.placeholder.gameObject.GetComponent<Text>().text;
+            }
+            _panelController.NewGame(gameName, teamNames);
         }
 
         public void ShowPanelCustom()
         {
             _teamNameInputFields.ForEach(x => x.text = "");
-            StartCoinsInputField.text = 15.ToString();
             for (int i = 2; i < 5; i++)
             {
                 Teams[i].SetActive(false);
             }
             _teamsCount = 2;
+
+            GameNameInputField.text = "";
+            CloseButton.SetActive(true);
+            BlockPanel.SetActive(true);
             gameObject.SetActive(true);
+        }
+
+        public void HideCustom()
+        {
+            BlockPanel.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }
