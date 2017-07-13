@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 1
+  NumberColumnOfFlag: 2
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &497149
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -347,7 +349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 2
+  NumberColumnOfFlag: 4
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &85391842
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2108,7 +2112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 0
+  NumberColumnOfFlag: 1
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!1 &660137228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2298,7 +2304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 7
+  NumberColumnOfFlag: 11
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &698435832
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2454,7 +2462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 12
+  NumberColumnOfFlag: 17
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &802419379
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2633,7 +2643,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 11
+  NumberColumnOfFlag: 16
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &868080785
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2994,7 +3006,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 5
+  NumberColumnOfFlag: 7
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1033306242
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3076,7 +3090,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 10
+  NumberColumnOfFlag: 15
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1068397821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3428,7 +3444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 9
+  NumberColumnOfFlag: 13
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1154715422
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3578,7 +3596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 3
+  NumberColumnOfFlag: 5
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1202985409
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3982,15 +4002,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamsName: []
-  InfoAboutTeams: {fileID: 1905263648713402, guid: f464ace821c45024990287899eec3f3b,
+  InfoAboutTeams: {fileID: 1905263648713402, guid: c2c6b81777aa8254da77fae0c86985ad,
     type: 2}
+  Title: {fileID: 15199738}
   ImageBackground: {fileID: 1456032074}
+  CountCoins: {fileID: 1721100811}
   TeamsPieck:
   - {fileID: 1202460855653324, guid: 10814e0c37aab8349899b24b063d0dc3, type: 2}
   - {fileID: 1380080302293990, guid: fbd3011dace3f804e81f3485de56351d, type: 2}
   - {fileID: 1922948574510014, guid: 4532344970d84124a9ce8d39943de285, type: 2}
   - {fileID: 1471895706741276, guid: 51f1e7b91ef96944c85f0f6e75ae2356, type: 2}
   - {fileID: 1777773877459242, guid: 14b66c9451c61a8428a625f52229aeac, type: 2}
+  _infoAboutTeams: []
 --- !u!114 &1344057085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4085,7 +4108,7 @@ RectTransform:
   m_GameObject: {fileID: 1432219569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.91625, y: 0.91625, z: 0.91625}
   m_Children:
   - {fileID: 1456032075}
   - {fileID: 1567923155}
@@ -4097,8 +4120,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 335.2, y: 65.4}
-  m_SizeDelta: {x: 316.2, y: 183}
+  m_AnchoredPosition: {x: 340, y: 62}
+  m_SizeDelta: {x: 353, y: 199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1456032074
 GameObject:
@@ -4861,7 +4884,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 4
+  NumberColumnOfFlag: 6
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1693516600
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4943,7 +4968,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 6
+  NumberColumnOfFlag: 9
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1701114018
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5613,7 +5640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 13
+  NumberColumnOfFlag: 19
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1943083777
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5695,7 +5724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b30d5b29d72bb646ae635948d05ef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberColumnOfFlag: 8
+  NumberColumnOfFlag: 12
+  IsEmpty: 1
+  TeamOwned: 0
 --- !u!212 &1957012294
 SpriteRenderer:
   m_ObjectHideFlags: 0
