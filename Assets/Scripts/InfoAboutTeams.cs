@@ -9,6 +9,9 @@ public class InfoAboutTeams : MonoBehaviour {
     public Text OwnedLend;
     public Text Question;
 
+    public int CountLand = 0;
+    public int CountQuestion = 0;
+
 
 	// Use this for initialization
 	void Start () {

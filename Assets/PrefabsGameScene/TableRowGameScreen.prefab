@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 114485847827950564}
   - component: {fileID: 114963976370239406}
   m_Layer: 5
-  m_Name: TableRow
+  m_Name: TableRowGameScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,6 +397,8 @@ MonoBehaviour:
   Name: {fileID: 114479214609059594}
   OwnedLend: {fileID: 114366798287270318}
   Question: {fileID: 114347894108056144}
+  CountLand: 0
+  CountQuestion: 0
 --- !u!222 &222037519384676954
 CanvasRenderer:
   m_ObjectHideFlags: 1
