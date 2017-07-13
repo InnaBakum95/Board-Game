@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 114485847827950564}
   - component: {fileID: 114963976370239406}
   m_Layer: 5
-  m_Name: TableRow
+  m_Name: TableRowGameScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
