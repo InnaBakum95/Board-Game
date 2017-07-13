@@ -6410,7 +6410,7 @@ GameObject:
   - component: {fileID: 1800797921}
   - component: {fileID: 1800797920}
   m_Layer: 0
-  m_Name: Render Camera
+  m_Name: RenderCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
