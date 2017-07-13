@@ -32,6 +32,13 @@ public partial class MoveTeam : MonoBehaviour {
     private int TeamThirdCount = 0;
     private int TeamFourCount = 0;
     private int TeamFiveCount = 0;
+    public float percent = 0.05f;
+
+    float alphaF = 0.01f;
+    float alphaS = 0.01f;
+    float alphaTh = 0.01f;
+    float alphaFou = 0.01f;
+    float alphaFive = 0.01f;
 
     private int currentPositionTeam = 0;
 
@@ -51,6 +58,54 @@ public partial class MoveTeam : MonoBehaviour {
         iTween.DrawLineGizmos(pathTeamFive);
     }
 
+
+    public void MoveToHome(int currentTeam)
+    {
+        Vector3[] path = new Vector3[] { };
+
+        switch (currentTeam + 1)
+        {
+            case 1:
+                currentPositionTeam = TeamOneCount;
+                path = pathTeamOne;
+                break;
+            case 2:
+                path = pathTeamTwo;
+                currentPositionTeam = TeamSecondCount;
+                break;
+            case 3:
+                path = pathTeamThree;
+                currentPositionTeam = TeamThirdCount;
+                break;
+            case 4:
+                path = pathTeamFour;
+                currentPositionTeam = TeamFourCount;
+                break;
+            case 5:
+                path = pathTeamFive;
+                currentPositionTeam = TeamFiveCount;
+                break;
+        }
+        iTween.MoveTo(Teams[currentTeam], path[0], 1f);
+        switch (currentTeam + 1)
+        {
+            case 1:
+                TeamOneCount = 0;
+                break;
+            case 2:
+                TeamSecondCount = 0;
+                break;
+            case 3:
+                TeamThirdCount = 0;
+                break;
+            case 4:
+                TeamFourCount = 0;
+                break;
+            case 5:
+                TeamFiveCount = 0;
+                break;
+        }
+    }
 
 
     public void OwnedLandForCurrentTeam(int currentTeam)
@@ -80,58 +135,84 @@ public partial class MoveTeam : MonoBehaviour {
                 break;
         }
 
-        Flag _currentFlag = FlagsList.Find(x => x.NumberColumnOfFlag == currentPositionTeam-1);
+        Flag _currentFlag = FlagsList.Find(x => x.NumberColumnOfFlag == currentPositionTeam);
         _currentFlag.gameObject.GetComponent<SpriteRenderer>().color = currentColor;
+        if (_currentFlag.IsEmpty)
+        {
+            _currentFlag.TeamOwned = currentTeam;
+            _currentFlag.IsEmpty = false;
+            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand++.ToString();
+
+        }
+        if (!_currentFlag.IsEmpty)
+        {
+            GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand--.ToString();
+            _currentFlag.TeamOwned = currentTeam;
+            _currentFlag.IsEmpty = false;
+        }
     }
 
-    public void MoveGOTeamForward(int numberTeam)
+    public void MoveGOTeamForward(int numberTeam, int count)
     {
         Vector3[] path = new Vector3[] { };
+        float alpha = 0;
         
         switch (numberTeam+1)
         {
             case 1:
                 currentPositionTeam = TeamOneCount;
+                alpha = alphaF;
                 path = pathTeamOne;
                 break;
             case 2:
                 path = pathTeamTwo;
+                alpha = alphaS;
                 currentPositionTeam = TeamSecondCount;
                 break;
             case 3:
                 path = pathTeamThree;
+                alpha = alphaTh;
                 currentPositionTeam = TeamThirdCount;
                 break;
             case 4:
                 path = pathTeamFour;
+                alpha = alphaFou;
                 currentPositionTeam = TeamFourCount;
                 break;
             case 5:
                 path = pathTeamFive;
+                alpha = alphaFive;
                 currentPositionTeam = TeamFiveCount;
                 break;
         }
         
 
 
-        int i; 
-        bool tryParse= int.TryParse(inputField.text, out i);
+        int i = count; 
+        
         Debug.Log(i);
+        
         for (int j = 1; j <= i; j++)
         {
+           
             if (currentPositionTeam <= path.Length - 2)
             {
                 currentPositionTeam++;
-                iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+                //iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+                iTween.PutOnPath(Teams[numberTeam], path, percent*currentPositionTeam + alpha);
 
-                
+
             }
             else
             {
                 currentPositionTeam = 0;
+                alpha = 0f;
                 iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
-                
+                //iTween.PutOnPath(Teams[numberTeam], path, percent * currentPositionTeam + alpha);
+
             }
+            alpha += 0.0015f;
+
         }
         Debug.Log("First"+ currentPositionTeam);
 
@@ -140,64 +221,78 @@ public partial class MoveTeam : MonoBehaviour {
         {
             case 1:
                 TeamOneCount= currentPositionTeam;
+                alphaF = alpha;
                 break;
             case 2:
                 TeamSecondCount = currentPositionTeam;
+                alphaS = alpha;
                 break;
             case 3:
                 TeamThirdCount = currentPositionTeam;
+                alphaTh = alpha;
                 break;
             case 4:
                 TeamFourCount = currentPositionTeam;
+                alphaFou = alpha;
                 break;
             case 5:
                 TeamFiveCount = currentPositionTeam;
+                alphaFive = alpha;
                 break;
         }
 
     }
 
-    public void MoveGOTeamBack(int numberTeam)
+    public void MoveGOTeamBack(int numberTeam, int count)
     {
         Vector3[] path = new Vector3[] { };
+        float alpha = 0;
+
         switch (numberTeam + 1)
         {
             case 1:
                 currentPositionTeam = TeamOneCount;
+                alpha = alphaF;
                 path = pathTeamOne;
                 break;
             case 2:
                 path = pathTeamTwo;
+                alpha = alphaS;
                 currentPositionTeam = TeamSecondCount;
                 break;
             case 3:
                 path = pathTeamThree;
+                alpha = alphaTh;
                 currentPositionTeam = TeamThirdCount;
                 break;
             case 4:
                 path = pathTeamFour;
+                alpha = alphaFou;
                 currentPositionTeam = TeamFourCount;
                 break;
             case 5:
                 path = pathTeamFive;
+                alpha = alphaFive;
                 currentPositionTeam = TeamFiveCount;
                 break;
         }
-        int i;
-        bool tryParse = int.TryParse(inputField.text, out i);
+        int i = count;
         Debug.Log(i);
         for (int j = 1; j <= i; j++)
         {
             if (currentPositionTeam >= 1)
             {
                 currentPositionTeam--;
-                iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+                //iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+                iTween.PutOnPath(Teams[numberTeam], path, percent * currentPositionTeam + alpha);
 
             }
             if (currentPositionTeam < 1)
             {
                 currentPositionTeam = 0;
+                alpha = 0;
             }
+            alpha += 0.0015f;
         }
         Debug.Log("Second"+ currentPositionTeam);
 
@@ -205,18 +300,23 @@ public partial class MoveTeam : MonoBehaviour {
         {
             case 1:
                 TeamOneCount = currentPositionTeam;
+                alphaF = alpha;
                 break;
             case 2:
                 TeamSecondCount = currentPositionTeam;
+                alphaS = alpha;
                 break;
             case 3:
                 TeamThirdCount = currentPositionTeam;
+                alphaTh = alpha;
                 break;
             case 4:
                 TeamFourCount = currentPositionTeam;
+                alphaFou = alpha;
                 break;
             case 5:
                 TeamFiveCount = currentPositionTeam;
+                alphaFive = alpha;
                 break;
         }
 
