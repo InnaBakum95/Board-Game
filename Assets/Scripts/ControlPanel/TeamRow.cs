@@ -33,7 +33,16 @@ public class TeamRow : MonoBehaviour
     public void Move(bool isForward)
     {
         string stepsText = MoveStepsInputField.text;
-        if (string.IsNullOrEmpty(stepsText)) return;
+        if (string.IsNullOrEmpty(stepsText))
+        {
+            return;
+        }
+        int stepsInt = Convert.ToInt32(stepsText);
+        if (stepsInt > 20 || stepsInt <= 0)
+        {
+            Debug.Log("Can't go more then 20 or less then 0 steps.");
+            return;
+        }
         byte steps = Convert.ToByte(stepsText);
         byte team = Convert.ToByte(_teamNumber);
         _panelController.Move(team, steps, isForward);
@@ -48,50 +57,16 @@ public class TeamRow : MonoBehaviour
         }
         int newLocation = _currentLocation + addSteps;
 
-        #region DontSeeThisIfes :D
         
-        if (newLocation > 100)
-        {
-            newLocation -= 100;
-        }
-        else if (newLocation > 80)
-        {
-            newLocation -= 80;
-        }
-        else if (newLocation > 60)
-        {
-            newLocation -= 60;
-        }
-        else if (newLocation > 40)
-        {
-            newLocation -= 40;
-        }
-        else if (newLocation > 20)
+        if (newLocation > 20)
         {
             newLocation -= 20;
-        }
-        else if (newLocation <= -80)
-        {
-            newLocation += 100;
-        }
-        else if (newLocation <= -60)
-        {
-            newLocation += 80;
-        }
-        else if (newLocation <= -40)
-        {
-            newLocation += 60;
-        }
-        else if (newLocation <= -20)
-        {
-            newLocation += 40;
         }
         else if (newLocation <= 0)
         {
             newLocation += 20;
         }
-
-        #endregion
+        
 
         SetLocation(newLocation);
     }
