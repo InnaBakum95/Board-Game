@@ -8,6 +8,12 @@ public class InfoAboutTeams : MonoBehaviour {
     public Text Name;
     public Text OwnedLend;
     public Text Question;
+    public Image NamePanel;
+    public Image QuestionPanel;
+    public Image OwnLandPanel;
+
+
+    //public Color ColorColumn;
 
     public int CountLand = 0;
     public int CountQuestion = 0;

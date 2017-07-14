@@ -16,6 +16,7 @@ public partial class MoveTeam : MonoBehaviour {
     public Color Green;
     public Color Blue;
     public Color Purple;
+    public Color Ivory;
 
     public InputField inputField;
 
@@ -86,7 +87,11 @@ public partial class MoveTeam : MonoBehaviour {
                 currentPositionTeam = TeamFiveCount;
                 break;
         }
-        iTween.MoveTo(Teams[currentTeam], path[0], 1f);
+        //iTween.MoveTo(Teams[currentTeam], path[0], 1f);
+
+        NewMoveTeam(20 - currentPositionTeam, true, currentTeam, path);
+
+
         switch (currentTeam + 1)
         {
             case 1:
@@ -136,19 +141,37 @@ public partial class MoveTeam : MonoBehaviour {
         }
 
         Flag _currentFlag = FlagsList.Find(x => x.NumberColumnOfFlag == currentPositionTeam);
-        _currentFlag.gameObject.GetComponent<SpriteRenderer>().color = currentColor;
+        _currentFlag.gameObject.GetComponent<SpriteRenderer>().color = Ivory;
+        _currentFlag.FlagGameObject.GetComponent<SpriteRenderer>().color = currentColor;
+       // _currentFlag.gameObject.GetComponentInChildren<SpriteRenderer>().color = currentColor;
+        //Debug.Log("Current Flag" + _currentFlag.GetComponentInChildren<SpriteRenderer>().color);
+
+
         if (_currentFlag.IsEmpty)
         {
+            int countLand = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand +1;
+            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand = countLand;
             _currentFlag.TeamOwned = currentTeam;
             _currentFlag.IsEmpty = false;
-            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand++.ToString();
+            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand.ToString();
 
         }
-        if (!_currentFlag.IsEmpty)
+       else
         {
-            GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand--.ToString();
-            _currentFlag.TeamOwned = currentTeam;
-            _currentFlag.IsEmpty = false;
+            if (GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand > 0 & (_currentFlag.TeamOwned != currentTeam))
+            {
+                Debug.Log("team own");
+                int countL = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand - 1;
+                GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand = countL;
+
+                GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand.ToString();
+
+                _currentFlag.TeamOwned = currentTeam;
+                int countLand = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand + 1;
+                GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand = countLand;
+                GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand.ToString();
+                _currentFlag.IsEmpty = false;
+            }
         }
     }
 
@@ -185,21 +208,23 @@ public partial class MoveTeam : MonoBehaviour {
                 currentPositionTeam = TeamFiveCount;
                 break;
         }
-        
+
+        NewMoveTeam(count, true, numberTeam, path);
 
 
-        int i = count; 
-        
-        Debug.Log(i);
-        
+
+
+
+
+        /*
         for (int j = 1; j <= i; j++)
         {
            
             if (currentPositionTeam <= path.Length - 2)
             {
                 currentPositionTeam++;
-                //iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
-                iTween.PutOnPath(Teams[numberTeam], path, percent*currentPositionTeam + alpha);
+                iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+               // iTween.PutOnPath(Teams[numberTeam], path, percent*currentPositionTeam + alpha);
 
 
             }
@@ -215,7 +240,7 @@ public partial class MoveTeam : MonoBehaviour {
 
         }
         Debug.Log("First"+ currentPositionTeam);
-
+        */
 
         switch (numberTeam + 1)
         {
@@ -242,6 +267,111 @@ public partial class MoveTeam : MonoBehaviour {
         }
 
     }
+
+    public void NewMoveTeam(int moveCount, bool isForward, int numberTeam, Vector3[] path)
+    {
+        //int moveCount = count;
+        int targetPosition = currentPositionTeam + moveCount;
+        Debug.Log(moveCount);
+
+        List<int> movePath = new List<int>();
+        //movePath.Add(currentPositionTeam);
+
+        if (isForward)
+        {
+            targetPosition = currentPositionTeam + moveCount;
+            Debug.Log(moveCount);
+            movePath.Add(currentPositionTeam);
+
+            for (int i = currentPositionTeam; i < targetPosition;)
+            {
+                i++;
+
+                if (i == 20)
+                    i = 0;
+
+                if (i % 5 == 0)
+                {
+                    movePath.Add(i);
+                }
+
+                //Adding last pos
+                if (i == targetPosition && (i % 5 != 0))
+                {
+                    movePath.Add(i);
+                }
+            }
+        }
+        else
+        {
+            targetPosition = currentPositionTeam - moveCount;
+            Debug.Log(moveCount);
+            movePath.Add(currentPositionTeam);
+
+            for (int i = currentPositionTeam; i > targetPosition;)
+            {
+                i--;
+
+                if (i < 0)
+                {
+                    if ((20 - i) % 5 == 0)
+                    {
+                        movePath.Add((20 - i));
+                    }
+
+                    //Adding last pos
+                    if ((20 - i) == targetPosition && ((20 - i) % 5 != 0))
+                    {
+                        movePath.Add((20 - i));
+                    }
+                }
+                else
+                {
+                    if (i % 5 == 0)
+                    {
+                        movePath.Add(i);
+                    }
+
+                    //Adding last pos
+                    if (i == targetPosition && (i % 5 != 0))
+                    {
+                        movePath.Add(i);
+                    }
+
+                }
+            }
+
+        }
+
+
+
+
+        foreach (var move in movePath)
+        {
+            Debug.Log("Move Path: " + move);
+        }
+
+
+        float transitionCoefficient = 0.5f;
+        float transitionTime = 0f;
+        float previousTransitionTime = 0f;
+
+        for (int i = 1; i < movePath.Count; i++)
+        {
+            if(isForward)
+                transitionTime = (movePath[i] - movePath[i - 1]) * transitionCoefficient;
+            else
+                transitionTime = (movePath[i - 1] - movePath[i]) * transitionCoefficient;
+
+        iTween.MoveTo(Teams[numberTeam], iTween.Hash("position", path[movePath[i]], "time", transitionTime,
+                "delay", previousTransitionTime));
+
+            previousTransitionTime += transitionTime;
+        }
+
+        currentPositionTeam = targetPosition;
+    }
+
 
     public void MoveGOTeamBack(int numberTeam, int count)
     {
@@ -276,25 +406,28 @@ public partial class MoveTeam : MonoBehaviour {
                 currentPositionTeam = TeamFiveCount;
                 break;
         }
-        int i = count;
-        Debug.Log(i);
-        for (int j = 1; j <= i; j++)
-        {
-            if (currentPositionTeam >= 1)
-            {
-                currentPositionTeam--;
-                //iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
-                iTween.PutOnPath(Teams[numberTeam], path, percent * currentPositionTeam + alpha);
 
-            }
-            if (currentPositionTeam < 1)
-            {
-                currentPositionTeam = 0;
-                alpha = 0;
-            }
-            alpha += 0.0015f;
-        }
-        Debug.Log("Second"+ currentPositionTeam);
+        NewMoveTeam(count, false, numberTeam, path);
+
+        //int i = count;
+        //Debug.Log(i);
+        //for (int j = 1; j <= i; j++)
+        //{
+        //    if (currentPositionTeam >= 1)
+        //    {
+        //        currentPositionTeam--;
+        //        iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+        //       // iTween.PutOnPath(Teams[numberTeam], path, percent * currentPositionTeam + alpha);
+
+        //    }
+        //    if (currentPositionTeam < 1)
+        //    {
+        //        currentPositionTeam = 0;
+        //        alpha = 0;
+        //    }
+        //    alpha += 0.0015f;
+        //}
+        //Debug.Log("Second"+ currentPositionTeam);
 
         switch (numberTeam + 1)
         {
