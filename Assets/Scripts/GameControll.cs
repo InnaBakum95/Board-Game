@@ -10,6 +10,7 @@ public class GameControll : MonoBehaviour
         public static GameControll Instance;
         public List<string> TeamsName = new List<string>();
         public GameObject InfoAboutTeams;
+        public List<Color> colorTeam = new List<Color>();
         
         public Text Title; 
         public GameObject ImageBackground;
@@ -88,7 +89,11 @@ public class GameControll : MonoBehaviour
             //Debug.Log("Data: code = " + data.Code);
         }
 
-        void Team(Data data)
+    //void NewGameStart()
+    //{
+
+    //}
+    void Team(Data data)
         {
         int i = 0;
         Title.text = data.NewGameInfo.GameName;
@@ -108,7 +113,13 @@ public class GameControll : MonoBehaviour
                 tmpTeams.transform.SetParent(ImageBackground.transform);
                 tmpTeams.transform.position = pos;
                 tmpTeams.transform.localScale = scale;
-                tmpTeams.GetComponent<InfoAboutTeams>().Name.text = team;
+            //tmpTeams.GetComponent<InfoAboutTeams>().NamePanel.color = colorTeam[i];
+            //tmpTeams.GetComponent<InfoAboutTeams>().OwnLandPanel.color = colorTeam[i];
+            //tmpTeams.GetComponent<InfoAboutTeams>().QuestionPanel.color = colorTeam[i];
+
+            tmpTeams.GetComponent<InfoAboutTeams>().Name.color = colorTeam[i];
+
+            tmpTeams.GetComponent<InfoAboutTeams>().Name.text = team;
                 tmpTeams.GetComponent<InfoAboutTeams>().OwnedLend.text = ""+ tmpTeams.GetComponent<InfoAboutTeams>().CountLand;
                 tmpTeams.GetComponent<InfoAboutTeams>().Question.text = ""+ tmpTeams.GetComponent<InfoAboutTeams>().CountQuestion;
                 _infoAboutTeams.Add(tmpTeams);

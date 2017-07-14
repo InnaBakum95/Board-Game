@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9485294, g: 1, b: 0.9922795, a: 1}
+  m_Color: {r: 0.93333334, g: 0.9098039, b: 0.9137255, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9485294, g: 1, b: 0.9922795, a: 1}
+  m_Color: {r: 0.93333334, g: 0.9098039, b: 0.9137255, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9485294, g: 1, b: 0.9922795, a: 1}
+  m_Color: {r: 0.93333334, g: 0.9098039, b: 0.9137255, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -397,6 +397,9 @@ MonoBehaviour:
   Name: {fileID: 114479214609059594}
   OwnedLend: {fileID: 114366798287270318}
   Question: {fileID: 114347894108056144}
+  NamePanel: {fileID: 114500124615935246}
+  QuestionPanel: {fileID: 114323814186575446}
+  OwnLandPanel: {fileID: 114262659244705152}
   CountLand: 0
   CountQuestion: 0
 --- !u!222 &222037519384676954
