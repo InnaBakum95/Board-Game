@@ -139,15 +139,27 @@ public partial class MoveTeam : MonoBehaviour {
         _currentFlag.gameObject.GetComponent<SpriteRenderer>().color = currentColor;
         if (_currentFlag.IsEmpty)
         {
+            int countLand = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand +1;
+            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand = countLand;
             _currentFlag.TeamOwned = currentTeam;
             _currentFlag.IsEmpty = false;
-            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand++.ToString();
+            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand.ToString();
 
         }
-        if (!_currentFlag.IsEmpty)
+       else
         {
-            GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand--.ToString();
-            _currentFlag.TeamOwned = currentTeam;
+            if (GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand > 0 & (_currentFlag.TeamOwned != currentTeam))
+            {
+				Debug.Log("team own");
+                int countL = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand - 1;
+                GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand = countL;
+
+                GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand.ToString();
+            }
+                _currentFlag.TeamOwned = currentTeam;
+            int countLand = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand + 1;
+            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand = countLand;
+			GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand.ToString();
             _currentFlag.IsEmpty = false;
         }
     }
@@ -198,8 +210,8 @@ public partial class MoveTeam : MonoBehaviour {
             if (currentPositionTeam <= path.Length - 2)
             {
                 currentPositionTeam++;
-                //iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
-                iTween.PutOnPath(Teams[numberTeam], path, percent*currentPositionTeam + alpha);
+                iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+               // iTween.PutOnPath(Teams[numberTeam], path, percent*currentPositionTeam + alpha);
 
 
             }
@@ -283,8 +295,8 @@ public partial class MoveTeam : MonoBehaviour {
             if (currentPositionTeam >= 1)
             {
                 currentPositionTeam--;
-                //iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
-                iTween.PutOnPath(Teams[numberTeam], path, percent * currentPositionTeam + alpha);
+                iTween.MoveTo(Teams[numberTeam], path[currentPositionTeam], 1f);
+               // iTween.PutOnPath(Teams[numberTeam], path, percent * currentPositionTeam + alpha);
 
             }
             if (currentPositionTeam < 1)
