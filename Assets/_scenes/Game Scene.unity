@@ -1124,6 +1124,35 @@ SpriteRenderer:
   m_Size: {x: 3.01, y: 2.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+--- !u!1 &258505513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 645017174}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 258505514}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &258505514
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 645017174}
+  m_GameObject: {fileID: 258505513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 645017175}
+  m_Father: {fileID: 1456032075}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260499995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,11 +2975,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 491255a66bdaaeb44a1d25118ede2e9b, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &645017175 stripped
+--- !u!224 &645017175
 RectTransform:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 224854264725538384, guid: 491255a66bdaaeb44a1d25118ede2e9b,
     type: 2}
   m_PrefabInternal: {fileID: 645017174}
+  m_GameObject: {fileID: 836938854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 258505514}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &656201025
 GameObject:
   m_ObjectHideFlags: 0
@@ -3644,6 +3687,21 @@ SpriteRenderer:
   m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+--- !u!1 &836938854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 645017174}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 645017175}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &837744616
 GameObject:
   m_ObjectHideFlags: 0
@@ -6101,6 +6159,7 @@ MonoBehaviour:
   Blue: {r: 0, g: 0.36862746, b: 0.6901961, a: 1}
   Purple: {r: 0.40784314, g: 0.17254902, b: 0.53333336, a: 1}
   Ivory: {r: 1, g: 1, b: 1, a: 1}
+  BlankColor: {r: 0, g: 0, b: 0, a: 0}
   inputField: {fileID: 995820030}
   percent: 0.05
 --- !u!4 &1344057083
@@ -6128,7 +6187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamsName: []
-  InfoAboutTeams: {fileID: 1905263648713402, guid: 491255a66bdaaeb44a1d25118ede2e9b,
+  InfoAboutTeams: {fileID: 1905263648713402, guid: c2c6b81777aa8254da77fae0c86985ad,
     type: 2}
   colorTeam:
   - {r: 0.8784314, g: 0, b: 0.105882354, a: 1}
@@ -6490,7 +6549,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 911845897}
-  - {fileID: 645017175}
+  - {fileID: 258505514}
   m_Father: {fileID: 226495543}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
