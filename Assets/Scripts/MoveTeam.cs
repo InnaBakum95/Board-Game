@@ -161,17 +161,24 @@ public partial class MoveTeam : MonoBehaviour {
             if (GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand > 0 & (_currentFlag.TeamOwned != currentTeam))
             {
                 Debug.Log("team own");
+
                 int countL = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand - 1;
                 GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand = countL;
 
                 GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[_currentFlag.TeamOwned].GetComponent<InfoAboutTeams>().CountLand.ToString();
-
                 _currentFlag.TeamOwned = currentTeam;
                 int countLand = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand + 1;
                 GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand = countLand;
                 GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand.ToString();
                 _currentFlag.IsEmpty = false;
             }
+/*            }
+                _currentFlag.TeamOwned = currentTeam;
+            int countLand = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand + 1;
+            GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand = countLand;
+			GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().OwnedLend.text = GameControll.Instance._infoAboutTeams[currentTeam].GetComponent<InfoAboutTeams>().CountLand.ToString();
+            _currentFlag.IsEmpty = false;
+*/
         }
     }
 
@@ -409,7 +416,7 @@ public partial class MoveTeam : MonoBehaviour {
                 break;
         }
 
-        NewMoveTeam(count, false, numberTeam, path);
+      NewMoveTeam(count, false, numberTeam, path);
 
         //int i = count;
         //Debug.Log(i);

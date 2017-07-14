@@ -51,7 +51,6 @@ public class GameControll : MonoBehaviour
             switch (action)
             {
                 case Codes.NewGame:
-                    Debug.Log("Data: code = " + data.Code);
                     CountCoins.text = data.ChallengeCoins.ToString();
                     Team(data);
                     break;
@@ -98,6 +97,14 @@ public class GameControll : MonoBehaviour
         {
         int i = 0;
         Title.text = data.NewGameInfo.GameName;
+        
+        for (int inc = 1; inc < ImageBackground.transform.childCount; inc++)
+        {
+            var row = ImageBackground.transform.GetChild(inc);
+            Destroy(row.gameObject);
+            _infoAboutTeams = new List<GameObject>();
+        }
+
         foreach (var team in data.NewGameInfo.TeamNames)
             {
                 tmpTeams = Instantiate(InfoAboutTeams);
