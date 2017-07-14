@@ -151,7 +151,12 @@ public partial class MoveTeam : MonoBehaviour {
         Flag _currentFlag = FlagsList.Find(x => x.NumberColumnOfFlag == currentPositionTeam);
         _currentFlag.gameObject.GetComponent<SpriteRenderer>().color = Ivory;
         _currentFlag.FlagGameObject.GetComponent<SpriteRenderer>().color = currentColor;
-       // _currentFlag.gameObject.GetComponentInChildren<SpriteRenderer>().color = currentColor;
+
+        _currentFlag.transform.Find("Outline 1").GetComponent<SpriteRenderer>().color = Ivory;
+        _currentFlag.transform.Find("Outline 2").GetComponent<SpriteRenderer>().color = Ivory;
+
+
+        // _currentFlag.gameObject.GetComponentInChildren<SpriteRenderer>().color = currentColor;
         //Debug.Log("Current Flag" + _currentFlag.GetComponentInChildren<SpriteRenderer>().color);
 
 
@@ -358,7 +363,6 @@ public partial class MoveTeam : MonoBehaviour {
         foreach (var move in movePath)
             Debug.Log("Move Path: " + move);
 
-
         float transitionCoefficient = 0.3f;
         float transitionTime = 0f;
         float previousTransitionTime = 0f;
@@ -380,7 +384,7 @@ public partial class MoveTeam : MonoBehaviour {
                 transitionTime = (firstIndex - movePath[i]) * transitionCoefficient;
             }
 
-        iTween.MoveTo(Teams[numberTeam], iTween.Hash("position", path[movePath[i]], "time", transitionTime,
+            iTween.MoveTo(Teams[numberTeam], iTween.Hash("position", path[movePath[i]], "time", transitionTime,
                 "delay", previousTransitionTime, "easetype", iTween.EaseType.linear));
 
             previousTransitionTime += transitionTime;
