@@ -50,7 +50,6 @@ public class GameControll : MonoBehaviour
             switch (action)
             {
                 case Codes.NewGame:
-                    Debug.Log("Data: code = " + data.Code);
                     CountCoins.text = data.ChallengeCoins.ToString();
                     Team(data);
                     break;
@@ -80,10 +79,10 @@ public class GameControll : MonoBehaviour
 
                 case Codes.OwnTheLand:
                     MoveTeam.Instance.OwnedLandForCurrentTeam(data.CurrentTeam-1);
-                    foreach (var curTeams in _infoAboutTeams)
-                    {
-                        curTeams.GetComponent<InfoAboutTeams>().OwnedLend.text = "" + curTeams.GetComponent<InfoAboutTeams>().CountLand;
-                    }
+                    //foreach (var curTeams in _infoAboutTeams)
+                    //{
+                      //  curTeams.GetComponent<InfoAboutTeams>().OwnedLend.text = "" + curTeams.GetComponent<InfoAboutTeams>().CountLand;
+                    //}
                     break;
             }
             //Debug.Log("Data: code = " + data.Code);
@@ -93,6 +92,14 @@ public class GameControll : MonoBehaviour
         {
         int i = 0;
         Title.text = data.NewGameInfo.GameName;
+        
+        for (int inc = 1; inc < ImageBackground.transform.childCount; inc++)
+        {
+            var row = ImageBackground.transform.GetChild(inc);
+            Destroy(row.gameObject);
+            _infoAboutTeams = new List<GameObject>();
+        }
+
         foreach (var team in data.NewGameInfo.TeamNames)
             {
                 tmpTeams = Instantiate(InfoAboutTeams);
@@ -115,14 +122,21 @@ public class GameControll : MonoBehaviour
     {
         if (trueAns)
         {
-            _infoAboutTeams[data.CurrentTeam-1].GetComponent<InfoAboutTeams>().Question.text = _infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion++.ToString();
-        }
-        else
+			int countQuest = _infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion+1;
+			_infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion = countQuest;
+			
+            _infoAboutTeams[data.CurrentTeam-1].GetComponent<InfoAboutTeams>().Question.text = _infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion.ToString();
+			
+		}
+         if (!trueAns)
         {
             if (tmpTeams.GetComponent<InfoAboutTeams>().CountQuestion > 0)
             {
-                _infoAboutTeams[data.CurrentTeam-1].GetComponent<InfoAboutTeams>().Question.text = _infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion--.ToString();
+				int countQ = _infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion-1;
+				_infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion = countQ;
+                _infoAboutTeams[data.CurrentTeam-1].GetComponent<InfoAboutTeams>().Question.text = _infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion.ToString();
             }
+			
         }
     }
 
