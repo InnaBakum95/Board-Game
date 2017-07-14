@@ -97,7 +97,10 @@ public class GameControll : MonoBehaviour
         {
         int i = 0;
         Title.text = data.NewGameInfo.GameName;
-        
+
+
+        MoveTeam.Instance.ClearFlagsAndTeamPeaks();
+
         for (int inc = 1; inc < ImageBackground.transform.childCount; inc++)
         {
             var row = ImageBackground.transform.GetChild(inc);
@@ -141,7 +144,7 @@ public class GameControll : MonoBehaviour
 		}
          if (!trueAns)
         {
-            if (tmpTeams.GetComponent<InfoAboutTeams>().CountQuestion > 0)
+            if (_infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion > 0)
             {
 				int countQ = _infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion-1;
 				_infoAboutTeams[data.CurrentTeam - 1].GetComponent<InfoAboutTeams>().CountQuestion = countQ;

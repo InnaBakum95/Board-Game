@@ -23,10 +23,11 @@ public class TeamRow : MonoBehaviour
 	    _panelController = FindObjectOfType<PanelController>();
 	}
 
-    public void SetTeamInfo(int teamNumber, string teamName)
+    public void SetTeamInfo(int teamNumber, string teamName, Color teamColor)
     {
         _teamNumber = teamNumber;
         TeamNameText.text = teamName;
+        TeamNameText.color = teamColor;
         SetHomeLocation();
     }
 
@@ -46,6 +47,7 @@ public class TeamRow : MonoBehaviour
         byte steps = Convert.ToByte(stepsText);
         byte team = Convert.ToByte(_teamNumber);
         _panelController.Move(team, steps, isForward);
+        MoveStepsInputField.text = "";
     }
 
     public void SetCurrentLocation(byte steps, bool moveForward)
@@ -86,6 +88,7 @@ public class TeamRow : MonoBehaviour
     {
         byte team = Convert.ToByte(_teamNumber);
         _panelController.MoveToHome(team);
+        MoveStepsInputField.text = "";
     }
 
     public void SendAnswerResult(bool isCorrect)

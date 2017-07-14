@@ -11,6 +11,7 @@ namespace Assets.Scripts.ControlPanel
         public GameObject RowPrefab;
 
         public NewGamePanel NewGamePanel;
+        public List<Color> TeamColors;
 
         private ServerClient _serverClient;
         private ChallengeCoins _challengeCoins;
@@ -80,7 +81,7 @@ namespace Assets.Scripts.ControlPanel
                 var newObj = Instantiate(RowPrefab, RowsPanel);
                 newObj.transform.localScale = Vector3.one;
                 var teamRow = newObj.GetComponent<TeamRow>();
-                teamRow.SetTeamInfo(i+1, newGameInfo.TeamNames[i]);
+                teamRow.SetTeamInfo(i+1, newGameInfo.TeamNames[i], TeamColors[i]);
                 _teamRows.Add(teamRow);
             }
 

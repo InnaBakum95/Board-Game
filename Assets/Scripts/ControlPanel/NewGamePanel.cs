@@ -54,7 +54,7 @@ namespace Assets.Scripts.ControlPanel
                 string teamName = _teamNameInputFields[i].text;
                 if (string.IsNullOrEmpty(teamName))
                 {
-                    teamName = "Team " + (i+1).ToString();
+                    teamName = _teamNameInputFields[i].placeholder.gameObject.GetComponent<Text>().text;
                 }
                 teamNames.Add(teamName);
             }

@@ -17,6 +17,7 @@ public partial class MoveTeam : MonoBehaviour {
     public Color Blue;
     public Color Purple;
     public Color Ivory;
+    public Color BlankColor;
 
     public InputField inputField;
 
@@ -43,6 +44,7 @@ public partial class MoveTeam : MonoBehaviour {
 
     private int currentPositionTeam = 0;
 
+    private readonly List<int> _positionsWithFlags = new List<int>{0,1,1,0,1,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1};
 
     // Use this for initialization
 
@@ -138,6 +140,12 @@ public partial class MoveTeam : MonoBehaviour {
                 currentColor = Purple;
                 currentPositionTeam = TeamFiveCount;
                 break;
+        }
+
+        if (_positionsWithFlags[currentPositionTeam] == 0)
+        {
+            Debug.Log("Teams can't own this land");
+            return;
         }
 
         Flag _currentFlag = FlagsList.Find(x => x.NumberColumnOfFlag == currentPositionTeam);
@@ -465,14 +473,24 @@ public partial class MoveTeam : MonoBehaviour {
     }
 
 
-    void Start () {
-        
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //iTween.PutOnPath(TeamOne, pathTeamOne, 1f);
-        
+    public void ClearFlagsAndTeamPeaks()
+    {
+        for (int teamNum = 0; teamNum < Instance.Teams.Count; teamNum++)
+        {
+            Instance.MoveToHome(teamNum);
+            Destroy(Instance.Teams[teamNum]);
+        }
+        Instance.Teams = new List<GameObject>();
+
+        TeamOneCount = TeamSecondCount = TeamThirdCount = TeamFourCount = TeamFiveCount = 0;
+        FlagsList.ForEach(x =>
+        {
+            x.GetComponent<SpriteRenderer>().color = BlankColor;
+            x.FlagGameObject.GetComponent<SpriteRenderer>().color = BlankColor;
+            var flagScript = x.GetComponent<Flag>();
+            flagScript.TeamOwned = 0;
+            flagScript.IsEmpty = true;
+        });
     }
+
 }
