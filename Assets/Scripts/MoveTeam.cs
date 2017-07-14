@@ -287,7 +287,6 @@ public partial class MoveTeam : MonoBehaviour {
         if (isForward)
         {
             targetPosition = currentPositionTeam + moveCount;
-            Debug.Log(moveCount);
             movePath.Add(currentPositionTeam);
 
             for (int i = currentPositionTeam; i < targetPosition;)
@@ -295,15 +294,16 @@ public partial class MoveTeam : MonoBehaviour {
                 i++;
 
                 if (i == 20)
+                {
                     i = 0;
+                    targetPosition -= 20;
+                }
 
                 if (i % 5 == 0)
                 {
                     movePath.Add(i);
                 }
-
-                //Adding last pos
-                if (i == targetPosition && (i % 5 != 0))
+                else if (i == targetPosition)
                 {
                     movePath.Add(i);
                 }
@@ -312,7 +312,7 @@ public partial class MoveTeam : MonoBehaviour {
         else
         {
             targetPosition = currentPositionTeam - moveCount;
-            Debug.Log(moveCount);
+            Debug.Log("Move Count: " + moveCount + "Target Pos: " + targetPosition);
             movePath.Add(currentPositionTeam);
 
             for (int i = currentPositionTeam; i > targetPosition;)
@@ -321,15 +321,15 @@ public partial class MoveTeam : MonoBehaviour {
 
                 if (i < 0)
                 {
-                    if ((20 - i) % 5 == 0)
+                    Debug.Log("Minus " + i);
+                    if ((20 + i) % 5 == 0)
                     {
-                        movePath.Add((20 - i));
+                        movePath.Add((20 + i));
                     }
-
-                    //Adding last pos
-                    if ((20 - i) == targetPosition && ((20 - i) % 5 != 0))
+                    else
+                    if ((20 + i) == (20 + targetPosition))
                     {
-                        movePath.Add((20 - i));
+                        movePath.Add((20 + i));
                     }
                 }
                 else
@@ -338,45 +338,47 @@ public partial class MoveTeam : MonoBehaviour {
                     {
                         movePath.Add(i);
                     }
-
-                    //Adding last pos
-                    if (i == targetPosition && (i % 5 != 0))
+                    else if (i == targetPosition)
                     {
                         movePath.Add(i);
                     }
-
                 }
             }
 
         }
 
-
-
-
         foreach (var move in movePath)
-        {
             Debug.Log("Move Path: " + move);
-        }
 
 
-        float transitionCoefficient = 0.5f;
+        float transitionCoefficient = 0.3f;
         float transitionTime = 0f;
         float previousTransitionTime = 0f;
 
         for (int i = 1; i < movePath.Count; i++)
         {
-            if(isForward)
-                transitionTime = (movePath[i] - movePath[i - 1]) * transitionCoefficient;
+            if (isForward)
+            {
+                int firstIndex = movePath[i];
+                firstIndex = firstIndex == 0 ? 20 : firstIndex;
+
+                transitionTime = (firstIndex - movePath[i - 1]) * transitionCoefficient;
+            }
             else
-                transitionTime = (movePath[i - 1] - movePath[i]) * transitionCoefficient;
+            {
+                int firstIndex = movePath[i - 1];
+                firstIndex = firstIndex == 0 ? 20 : firstIndex;
+
+                transitionTime = (firstIndex - movePath[i]) * transitionCoefficient;
+            }
 
         iTween.MoveTo(Teams[numberTeam], iTween.Hash("position", path[movePath[i]], "time", transitionTime,
-                "delay", previousTransitionTime));
+                "delay", previousTransitionTime, "easetype", iTween.EaseType.linear));
 
             previousTransitionTime += transitionTime;
         }
-
-        currentPositionTeam = targetPosition;
+        
+        currentPositionTeam = targetPosition >= 0 ? targetPosition : 20 + targetPosition;
     }
 
 
